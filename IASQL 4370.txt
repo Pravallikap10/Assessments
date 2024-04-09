@@ -1,0 +1,46 @@
+1)
+Select avg(DataUsed) as average_usage from CustomerIterations
+where Month="March" AND Year=2024
+GROUP BY month;
+
+2)
+select Month, sum(CallDuration) from CustomerIterations
+group by Month;
+
+3)
+select Month, sum(MessageCount), sum(DataUsed)
+ from CustomerIterations
+ group by Month;
+
+4)
+select SUM(TotalSalesAmount*UnitsSold) AS Total_Sales, SaleID from QuaterlySales
+WHERE ProductTypeID = 1;
+
+5)
+select ProductTypeID, (TotalSalesAmount*UnitsSold) from QuaterlySales
+WHERE Quarter = "Q1";
+
+6)
+select SaleID, Avg(TotalSalesAmount/UnitsSold) from QuaterlySales2
+WHERE Quarter ="Q2"AND ProductTypeID = 1 AND YEAR = 2024;
+
+7)
+select Region from SectorEnergyConsumption
+WHERE Region = Avg(ConsumptionKWH)
+having Region = "Solar" AND "Wind";
+
+8)
+select Sector, Month, ConsumptionKWh from SectorEnergyConsumption
+group by Month;
+
+9)
+select EnergySource from SectorEnergyConsumption
+group by EnergySource;
+
+10)
+ select CustomerName, AVG(FeedbackScore) as avg_score from InsuranceActivities
+  having FeedbackScore > avg_score OR Investigation = "No";
+
+11)
+
+12)
