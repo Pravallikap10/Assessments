@@ -1,0 +1,71 @@
+1)
+select machine_id, AVG(cost) AS monthly_average_cost
+    FROM L1_maintenance_records
+WHERE 
+    EXTRACT(YEAR_MONTH FROM maintenance_date) = 202403
+GROUP BY 
+    machine_id
+HAVING 
+    AVG(cost) > (
+        SELECT 
+            AVG(cost) AS overall_average_cost
+        FROM 
+            L1_maintenance_records
+        WHERE 
+            EXTRACT(YEAR_MONTH FROM maintenance_date) = 202403
+    );
+
+2)
+select maintenance_type, count(maintenance_type) as num_of_times from L1_maintenance_records
+WHERE 
+    EXTRACT(YEAR_MONTH FROM maintenance_date) = 202403
+group by maintenance_type;
+
+3)
+select technician_name, cost, count(maintenance_type) from L1_maintenance_records
+WHERE 
+    EXTRACT(YEAR_MONTH FROM maintenance_date) = 202403
+group by maintenance_type;
+
+4)
+select avg(count((incident_count_post_update) - (incident_count_pre_update))) as avg_red, product_id
+from L2_updates;
+
+5)
+select update_id, user_feedback_score from L2_updates
+order by user_feedback_score desc;
+
+6)
+select product_id, incident_count_post_update from L2_updates
+order by incident_count_post_update asc;
+
+7)
+
+select L3_patients.patient_name, L3_visits.facility_id, L3_visits.reason_for_visit, L3_treatments.outcome from L3_visits
+join 
+L3_visits on L3_visits.facility_id = L3_patients.facility_id
+join
+L3_visits on L3_visits.reason_for_visit = L3_patients.reason_for_visit
+join
+L3_visits on L3_visits.outcome = L3_treatments.outcome;
+
+8)
+select facility_id, reason_for_visit from L3_visits
+where reason_for_visit="Emergency";
+
+9)
+select patient_name, insurance_provider from L3_patients
+where (select outcome "Complicated" from L3_treatments) and
+    EXTRACT(YEAR_MONTH FROM L3_visits) = 202403;
+
+10)
+select product_name, category from L4_products
+ (sum(quantity) from L4_sales)
+EXTRACT(YEAR_MONTH FROM L4_sales) = 202403
+order by Category
+;
+
+11)
+NA
+12)
+NA
